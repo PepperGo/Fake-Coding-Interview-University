@@ -20,9 +20,10 @@ Middle      O(n)   O(n)
 Constant time to add/remove at the end 
 Linear time to add/remove at an arbitrary location
 
-
+//--------------------------------------------------------------------------------------------------------------------------
 //UC Berkeley CS61B - Linear and Multi-Dim Arrays (video): https://archive.org/details/ucberkeley_webcast_Wp8oiO_CZZE
 
+1D array:
 char[] c; //reference to array(any length of characters)
 c = new char[4];
 c[4] = 's'; //RunTime Error
@@ -34,3 +35,63 @@ c.length --> length of array, not length(), not size()
 
 String[] s = new String[8];
 Object[] o = new Object[8];
+
+Method: PrintPrimeNumbers
+
+2D array:
+Pascal's Triangle
+
+//-------------------------------------------------------------------------------------------------------------------------
+//Dynamic Arrays (video) https://www.coursera.org/learn/data-structures/lecture/EwbnV/dynamic-arrays
+Problem: static arrays are static: int my_arry[100];
+
+Semi-solution: dynamically-allocated arrays
+C++: vector
+Java: ArrayList
+Python: list(the only kind of array)
+Runtime: For ArrayList
+get(int index): O(1)
+set(int index, E element): O(1)
+add(E e): O(n)
+remove(int index): O(n)
+size(): O(1)
+
+1. Unlike static array, dynamic arrays can be resized.
+2. Appending a new element to a dynamic array is often constant time, but can take O(n)
+3. Some space is wasted
+
+//-----------------------------------------------------------------------------------------------------------------------
+//Jagged Arrays : https://www.youtube.com/watch?v=1jtrQqYpt7g
+AKA Array of Array
+
+int[][] ml = new int[4][];
+ml[0] = new int[6];
+ml[1] = new int[4];
+ml[2] = new int[4];
+ml[3] = new int[5];
+
+ml:
+0 1 2 3 4 5
+0 1 2 3
+0 1 2 3
+0 1 2 3 4
+
+
+//----------------------------------------------------------------------------------------------------------------
+//Resizable Arrays: https://www.lynda.com/Developer-Programming-Foundations-tutorials/Resizable-arrays/149042/177108-4.html
+List<Strinng> resizable = new ArrayList<String>();
+resizable.add("One");
+
+
+add(value)
+add(index, value)
+remove(index)
+
+The five requirements of any data structure:
+1. How to Access (one item/ all items)
+2. How to Insert (at end/ at position)
+3. How to Delete (from end/ from postion)
+4. How to Find (if exists/ what location)
+5. How to Sort (sort in place/ created sorted version)
+
+
