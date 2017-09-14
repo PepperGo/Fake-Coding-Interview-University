@@ -1,0 +1,36 @@
+// Arrays: https://www.coursera.org/learn/data-structures/lecture/OsBSF/arrays
+
+Array: Contiguous area of memory consisting of equal-size 
+       elements indexed by contiguous integers 
+Feature: Constant-time access(read/write)
+
+One Dimensional Array
+         array_addr + elem_size*(index - first_index)
+           
+Multi-Dimensional Arrays
+Feature: Row-major / Column-major(Some compliers)
+
+Time for Common Operations
+
+            Add    Remove
+Beginning   O(n)   O(n)
+End         O(1)   O(1)
+Middle      O(n)   O(n)
+
+Constant time to add/remove at the end 
+Linear time to add/remove at an arbitrary location
+
+
+//UC Berkeley CS61B - Linear and Multi-Dim Arrays (video): https://archive.org/details/ucberkeley_webcast_Wp8oiO_CZZE
+
+char[] c; //reference to array(any length of characters)
+c = new char[4];
+c[4] = 's'; //RunTime Error
+
+c.length --> length of array, not length(), not size()
+//length: array
+//length(): String
+//size(): List<Object> = new ArrayList();
+
+String[] s = new String[8];
+Object[] o = new Object[8];
