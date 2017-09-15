@@ -127,5 +127,81 @@ public class SList{
 	}
 }
 
+-----------------------------------------------------------------------------------------------------------------------
+CS 61B - Linked Lists 2 (video)(https://archive.org/details/ucberkeley_webcast_-c4I3gFYe3w)
+A private method or field is invisible & inaccessible to other classes.
+Why?
+1. To prevent data from being corrupted by other classes.
+2. You can improve the implementation without causing other classes to fail.
+(private, protected, public)
 
+Interface of a class: 1. prototypes for public method +  2. descriptions of their behaviors
 
+Abstract Data Type(ADT): a class with a well-defined interface, but implementation details are hidden from other classes.
+
+Invariant: a fact about a data structure that is always true.
+
+"A data object always represents a valid data"
+Not all classes are ADTs, some classes are just store data(no invariants).
+
+* The SList ADT.
+Another advantage of SList class: SList ADT enforces 2 invariants.
+1. "size" is always correct
+2. list is never circularly linked
+
+Both goals accomplished because only SList method can change the lists.(private)
+
+SList ensures this:
+1. The fields of SList(head and size) are "private".
+2. No method of SList returns on SListNode.
+
+----Doubly-Linked Lists:
+Inserting/deleting at front of list is easy:
+
+public void deleteFront(){
+	if(head != null){
+		head = head.next;
+		size--;
+	}
+}
+
+Inserting/deleting at the end of list takes a long time.
+class DListNode{
+	Object item;
+	DListNode next;
+	DListNode prev;
+}
+
+class DList{
+	private DListNode head;
+	private DListNode tail;
+}
+
+Insert&delete items at both ends in coinstant running time.
+Remove the tail node(at least 2 items in DList): 
+      tail.prev.next = null;
+      tail = tail.prev;
+
+----Sentinel: A special node that does not represent an item. (hidden)
+DList v.2: circularly linked list.
+
+class DListNode{
+	Object item;
+	DListNode next;
+	DListNode prev;
+}
+
+class DList{
+	private DListNode head;
+	private int size;
+}
+
+DList invariants with sentinel:
+1. For any DList d, d.head != null.
+2. For any DListNode x, x.next != null.
+3. For any DListNode x, x.prev != null.
+4. For any DListNode x, if x.next == y, then y.prev == x.
+5. For any DListNode x, if x.prev == y, then y.next == x.
+6. A DList's "size" variable is # DListNodes, NOT COUNTING sentinel
+
+Empty DList: sentinel's prev & next field point to itself.
