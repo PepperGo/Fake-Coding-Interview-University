@@ -1,1 +1,131 @@
+Singly Linked Lists(https://www.coursera.org/learn/data-structures/lecture/kHhgK/singly-linked-lists)
+
+Node contains: key, next pointer
+
+-------------------------------------------------------------------------------------------------------
+CS 61B - Linked Lists 1 (video) (https://archive.org/details/ucberkeley_webcast_htzJdKoEmO0)
+
+Lists: Store a list of ints(objects) as an array.
+Disavantages: 
+1. Insert new item at beginning or middle --> time proportional to length of array
+2. Arrays have a fixed length.
+
+public class List{
+	int[] a;
+	int lastItem;
+	
+	public List(){
+		a = new int[10];
+		lastItem = -1;
+	}
+	
+	public void insertItem(int newItem, int location){
+		int i;
+		
+		if(lastItem + 1 == a.length){
+			int[] b = new int[2*a.length];
+			for(i = 0; i <= lastItem; i++){
+				b[i] = a[i];
+			}
+			a = b;
+		}
+		for(i = lastItem; i >= location; i--){
+			a[i+1] = a[i];
+		}
+		a[location] = newItem;
+		lastItem++;
+	}
+}
+
+Linked Lists (a recursive data type): Made up of "nodes", each node has two thing: 1. an item 2. a reference to next node in list
+public class ListNode{
+	int item;
+	ListNode next;
+/*	public ListNode(int item, ListNode next){
+		this.item = item;
+		this.next = next;
+	}
+	*/
+}
+
+ListNode l1 = new ListNode(), l2 = new ListNode(), l3 = new ListNode();
+l1.item = 7;
+l2.item = 0;
+l2.item = 6;
+l1.next = l2; 
+l2.next = l3;
+l3.next = null;
+
+
+Node operations:
+public ListNode(int item, ListNode next){
+	this.item = item;
+	this.next = next;
+}
+
+public ListNode(int item){
+	this(item, null);
+}
+
+ListNode l1 = new ListNode(7, new ListNode(0, new ListNode(6))); // quick list without l2, l3
+Advantage over array lists:
+1. inserting item into middle of linked list takes constant time if you have reference to provious node.
+2. moreover, list can keep growing until memeory runs out.
+
+Inserts a new item after "this" :
+public void insertAfter(int item){
+	next = new ListNode(item, next);  // second next is the old value, first next is the new value
+}//used for insert item from tail to front
+.
+.
+.
+l2.insertAfter(3);
+
+Disadvantages:
+1. Finding the nth item of a linked list takes time propportional to n(the length of list).
+//Constant-time on array lists
+
+public ListNode nth(int position){
+	if(position == 0){
+		return this;
+	}else if(position < 0) || (next == null){
+		return null;
+	}else{
+		return next.nth(position-1); // recursive method
+	}
+}
+
+Lists of Objects
+Reference any object by declaring a reference of type Object.
+public class SListNode{//S means silly linked
+	public Object item;
+	public SlistNode next;
+}
+A List Class:
+2 problems with SListNodes:
+1. Two pointers point to one item. Then insert new item at the beginning of list.
+x = new SListNode("soap", x);
+y still point to the previous one.
+2. How do you represent an empty list?
+x = null;// Runtime error if you call a method on a null object
+e.g. x.nth(1);
+
+Solution: Separate SList class maintains head of list;
+
+public class SList{
+	private SListNode head;
+	private int size; //size is another advantage
+	
+	public SList{
+		head = null;
+		size = 0;
+	}
+	
+	public void insertFront(Object Item){
+		head = new SListNode(item, head);
+		size++;
+	}
+}
+
+
 
