@@ -205,3 +205,28 @@ DList invariants with sentinel:
 6. A DList's "size" variable is # DListNodes, NOT COUNTING sentinel
 
 Empty DList: sentinel's prev & next field point to itself.
+
+
+---------------------------------------------------------------------------------------------------------------
+Core Linked Lists Vs Arrays (video)(https://www.coursera.org/learn/data-structures-optimizing-performance/lecture/rjBs9/core-linked-lists-vs-arrays)
+
+ADT: List<Interface> ADT specifies functionality, but not efficiency!
+LinkedList ArrayList (DataStructure)
+
+ArrayList:
+ArrayList implements the List interface using an array.
+Can access elements in constant time.
+It takes O(n) to add an element to the front of an arrayList.
+It takes O(1) to get an element at a particular index in an ArrayList.
+
+LinkedList(Doubly Linked List/ Singly Linked List/sentinel nodes(dummy nodes)):
+It takes O(n) to get an element at a particular index in a LinkedList.
+
+
+
+
+
+
+
+
+
