@@ -1,1 +1,18 @@
+Queues (https://www.coursera.org/learn/data-structures/lecture/EShpq/queue)
+Queue: Abstract data type with the following operations:
+Enqueue(Key): adds key to collection
+Key Dequeue(): removes and returns least recently-added key
+Boolean Empty()
+
+FIFO: First-In, First-Out
+
+Queues can be implemented with either a linked list(with tail pointer) or an array.
+Each queue operation is O(1): Enqueue, Dequeue, Empty
+
+-------------------------------------------------------------------------------------
+Circular buffer/FIFO (https://en.wikipedia.org/wiki/Circular_buffer)
+
+A circular buffer is a data structure that uses a single, fixed-size buffer as if it were connected end-to-end.
+The useful property of a circular buffer is that it does not need to have its elements shuffled around when one is consumed.
+(If a non-circular buffer were used then it would be necessary to shift all elements when one is consumed.) 
 
