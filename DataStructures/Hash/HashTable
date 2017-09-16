@@ -1,1 +1,96 @@
+Understanding Hash Functions (video)(https://www.lynda.com/Developer-Programming-Foundations-tutorials/Understanding-hash-functions/149042/177126-4.html)
+
+Hashing is not Encryption:
+1. Hashing functions are typically one-way(not invertible)
+2. Information is lost when hashing
+
+Hashing rules:
+1. Hashing should be deterministic under the same context
+2. Two objects that are equal should return the same hash
+3. But the same hash may also result from different objects
+
+A hash table is the typical way to implement an associative array.
+The big benefit of hash tables over arrays and over linked lists is they're very fast, 
+both for looking at whether an item exists or finding a specific item in a hash table, 
+and for inserting and deleting items.
+
+
+Creating Hash tables:
+
+myHT.add("AZ","Arizona"): 
+"AZ" --> hash function --> "72830" --> %999(reducing that number down could be as simplistic as a modular operation.) --> remainer 5 --> map to specific index
+
+
+Managing Collisions: We get the same hash value for different objects
+These range from, reasonably simple, that each bucket in the hash table itself contains a simple collection, like an array, or a linked list, which can then point to multiple entries
+
+Now, there are other techniques for managing collisions inside hash tables, including open addressing, and the wonderfully named Cuckoo hashing, hop-scotch, and Robin Hood hashing.
+
+
+Every single class in Java already has a hashCode mthod.
+
+Hashing in Custom Classes:
+1. Default equality behavior checks identity
+2. Can be overriden to check internal state
+3. If you redefine equality, redefine hashing(If two objects are equal, they must return the same hash)
+4. This behavior is already provided for string objects
+------------------------------------------------------------------------------------------------------------
+Language support for hash tables(https://www.lynda.com/Developer-Programming-Foundations-tutorials/Language-support-hash-tables/149042/177129-4.html)
+For Java:
+HashTable, HashMap, ConcurrentHashMap
+Difference between Hashtable/HashMap: 
+1. The Hashtable class includes processing to synchronize across multiple threads
+
+Hashtable/Hashmap both are implementing the map interface
+
+(https://www.quora.com/What-is-the-difference-between-HashSet-HashMap-and-hash-table-How-do-they-behave-in-a-multi-threaded-environment)
+
+Hashtable 
+Hashtable is basically a data structure to retain values of key-value pair.
+
+1. It does not allow null for both key and value. It will throw NullPointerException.
+2. Hashtable does not maintain insertion order. The order is defined by the Hash function. So only use this if you do not need data in order.
+3. It is synchronized. It is slow. Only one thread can access in one time.
+4. HashTable rea thread safe.
+5. HashTable uses Enumerator to iterate through elements.
+
+Hashtable<Integer,String>; myTable= new Hashtable<Integer,String>();
+myTable.put(1, "John");
+myTable.put(2, "Cena");
+myTable.put(3, null); /* NullPointerEcxeption at runtime*/
+System.out.println(myTable.get(1));
+System.out.println(myTable.get(2));
+System.out.println(myTable.get(3));
+
+
+HashMap
+
+Like Hashtable it also accepts key value pair.
+
+1. It allows null for both key and value.
+2. HashMap does not maintain insertion order. The order is defined by the Hash function.
+3. It is not synchronized. It will have better performance.
+4. HashMap are not thread safe, but you can use Collections.synchronizedMap(new HashMap<K,V>())
+HashMap<Integer,String> myMap= new HashMap<Integer,String>();
+myMap.put(1, "First");
+myMap.put(2,"Second");
+myMap.put(3, null);
+
+HashSet
+
+HashSet does not allow duplicate values.
+
+1. It provides add method rather put method.
+2. You also use its contain method to check whether the object is already available in HashSet. HashSet can be used where you want to maintain a unique list.
+HashSet<String> mySet= new HashSet<String>();
+mySet.add ("First");
+mySet.add ("Second");
+mySet.add ("Third");
+ 
+if(mySet.contains("First")){
+	System.out.println("The Set already contains First");
+}
+
+-----------------------------------------------------------------------------------------------------------
+ 
 
