@@ -11,3 +11,14 @@ Output: Return whether or not the string's parentheses and square brackets are b
 
 Stack can be implemented with either an array or a linked list.
 Each stack operation is O(1): Push, Pop, Top, Empty
+
+LIFO: Last In, First Out
+
+------------------------------------------------------------------------------------------------
+Using Stacks Last-In First-Out (video) (https://www.lynda.com/Developer-Programming-Foundations-tutorials/Using-stacks-last-first-out/149042/177120-4.html)
+
+For Java: Stack (push/ pop/ peek
+
+More complete and consistent set of LIFO stack operations is provided by the Deque Interface and its implementation, which should be used in preference to this class(Stack.
+For example:
+     Deque<Integer> stack = new ArrayDeque<Integer>();
