@@ -1,1 +1,13 @@
+Stacks (video) (https://www.coursera.org/learn/data-structures/lecture/UdKzQ/stacks)
+Stack: Abstrct data type with the following operations:
+push(key)
+key Top()
+Key Pop()
 
+Usage:
+Balanced Brackets: 
+Input: A String str consisting of '(',')','[',']' characters
+Output: Return whether or not the string's parentheses and square brackets are balanced.
+
+Stack can be implemented with either an array or a linked list.
+Each stack operation is O(1): Push, Pop, Top, Empty
