@@ -1,3 +1,16 @@
+Using queues for first-in, first-out(https://www.lynda.com/Developer-Programming-Foundations-tutorials/Using-stacks-last-first-out/149042/177120-4.html)
+First In, First Out (FIFO)
+For Java: Queue<E>
+ArrayBlockingQueue, ConcurrentLinkedQueue
+
+Queue is an interface just as list was, so we can't create a queue object. 
+Instead, there are multiple concrete classes that do support queue behavior, including ArrayBlockingQueue and ConcurrentLinkedQueue. 
+Java has several specialized queue classes and these are mainly for different multi-threading and concurrency situations. 
+For a simple queue behavior the LinkedList class that we've already seen actually supports queue behavior it can act like a queue. 
+In Java we use the words add and remove when working with queues.
+
+
+-----------------------------------------------------------------------------------------------------------
 Queues (https://www.coursera.org/learn/data-structures/lecture/EShpq/queue)
 Queue: Abstract data type with the following operations:
 Enqueue(Key): adds key to collection
@@ -16,3 +29,27 @@ A circular buffer is a data structure that uses a single, fixed-size buffer as i
 The useful property of a circular buffer is that it does not need to have its elements shuffled around when one is consumed.
 (If a non-circular buffer were used then it would be necessary to shift all elements when one is consumed.) 
 
+-----------------------------------------------------------------------------------------------------------------------
+Priority queues and dequeues (https://www.lynda.com/Developer-Programming-Foundations-tutorials/Priority-queues-deques/149042/177123-4.html)
+
+Priority allows you to insert new elements into the queue that contain a priority. 
+If adding multiple items that have the same priority, they will queue as normal in a first in, first out order. 
+If something comes along with a higher priority, then it will go ahead of them in the queue and it would be removed from the queue beforehand.
+Anything with a lower priority just queues up as normal behind them.
+
+For Java: PriorityQueue Class
+
+Using Deque: (Double Ended Queue)
+A Double Ended Queue is basically like having a stack and queue at the same time.
+
+LinkedList implements Deque
+
+*Implement using linked-list, with tail pointer:
+enqueue(value) - adds value at position at tail
+dequeue() - returns value and removes least recently added element (front)
+empty()
+*Implement using fixed-sized array:
+enqueue(value) - adds item at end of available storage
+dequeue() - returns value and removes least recently added element
+empty()
+full()
