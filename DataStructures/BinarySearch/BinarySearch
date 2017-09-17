@@ -1,0 +1,43 @@
+Binary Search (video) (https://www.youtube.com/watch?v=D5SrAga1pno)
+
+//Python
+binarySearch(key, array[], min, max){
+	
+	if(max < min):
+	   return -1
+  else	
+	   midpoint = findMidPoint(min, max);
+	
+	   if(array[midpoint] < key):
+	       binarySearch(key, array, midpoint+1, max)
+     else if(array[midpoint] > key):
+	       binarySearch(key, array, min, midpoint-1)
+	   else:
+	       return midpoint
+}
+
+Binary Search Tree Properties:
+1. The left subtree of a node only contains values that are less than or equal to the node's value.
+2. The right subtree of a node only contains values that are greater than or equal to the node's value.
+3. Both left and right subtrees of a node are also binary search trees.
+
+------------------------------------------------------------------------------------------------------------------
+detail (https://www.topcoder.com/community/data-science/data-science-tutorials/binary-search/)
+
+
+public boolean binarySearch(int key, int[] data){
+	int low = 0;
+	int high = data.length - 1;
+	while(high >= low){
+		int mid = (low + high)/2;
+		if(data[mid] < key)
+			low = mid + 1;
+		else if(data[mid] > key)
+			high = mid - 1;
+		else
+			return true;
+	}
+	return false;
+}
+
+Complexity: O(logN)
