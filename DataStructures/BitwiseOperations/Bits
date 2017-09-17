@@ -1,1 +1,153 @@
+bits-cheat-cheet.pdf (https://github.com/jwasham/coding-interview-university/blob/master/extras/cheat%20sheets/bits-cheat-cheet.pdf)
 
+2^8 = 256
+2^10 = 1024
+2^16 = 65,536
+2^32 = 4,294,967,296
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+Bit Manipulation (video) (https://www.youtube.com/watch?v=7jkIUgLC29I)
+
+BITWISE OPERATIONS:
+
+AND & 
+OR |
+XOR ^
+NOT ~
+LEFT SHIFT <<
+RIGHT SHIFT >>
+
+
+AND: Only true if both input bits are true
+0 & 0 = 0
+1 & 0 = 0
+0 & 1 = 0
+1 & 1 = 1
+
+10010110 (&)
+00110011 -->
+00010010
+
+OR: True if any input bit is true
+0 | 0 = 0
+1 | 0 = 0
+0 | 1 = 0
+1 | 1 = 1
+
+10010110 (|)
+00110010
+10110110
+
+
+XOR: True if one and only one input bits is ture
+0 | 0 = 0
+1 | 0 = 1
+0 | 1 = 1
+1 | 1 = 0
+
+10010110(^)
+00110010 -->
+10100100
+
+ 
+NOT: One's complement operator, Flips the input bit 
+~0 = 1
+~1 = 0
+
+~00110010 ->
+ 11001101
+ 
+ 
+ 
+ LEFT SHIFT
+ Shift the binary digits by n, pad 0's on the right.
+ Each shift is a multiply by 2(unless there's overflow, which means 1 is on the leftmost)
+ 
+ 00010110
+ <<
+ 00000010 //00000010 = 2
+ 01011000
+ 
+ 
+ RIGHT SHIFT
+ Shift the binary digits by n, pad 0's on the left
+ Each shift is a divide by 2 with round towards negative infinity
+ 00010110
+ >>
+ 00000010 //00000010 = 2
+ 00000101
+ 
+ 
+BIT MANIPULATION BASICS
+
+SET BIT: set a position of a string of bits to 1.
+def set_bit(x, position):
+    mask = 1 << position
+    return x | mask
+e.g. x          00000110
+     positon    00000101
+     mask       00100000
+     
+     return     00100110
+     
+
+CLEAR BIT: clear a position of a string of bits to 0.
+def clear_bit(x, position):
+    mask = 1 << position
+    return x & ~mask
+     
+e.g x           00000110
+    position    00000010
+    mask        00000100
+    ~mask       11111011
+    
+    return      00000010
+    
+FLIP BIT: flip a postion of a string of bits
+def flip_bit(x,position):
+    mask = 1 << position
+    return x ^ mask
+e.g x           01100110
+    position    00000010
+    mask        00000100
+    
+    return      01100010
+   
+   
+IS BIT SET: return value at position one(start from right by 0) 
+def is_bit_set(x, position):
+    shifted = x >> position
+    return shifted & 1
+e.g. x          01100110 (index starts from 0)
+     position   00000101
+     shifted    00000011
+     
+     return     00000001 
+     
+
+MODIFY BIT:
+def modify_bit(x, position, state): state is 0: clear  state is 1: set
+    mask = 1 << position
+    return (x & ~mask) | (-state & mask)
+e.g. x          00000110
+     position   00000101
+     state      00000001   (set the bit)
+     mask       00100000
+     ~mask      11011111
+     -state     11111111
+     x & ~mask  00000110
+     -state&mask 00100000
+     
+     return     00100110
+ 
+ 
+ BIT TRICKS:
+ CHECK IF EVEN:
+ 
+ (x & 1) == 1
+ 
+ e.g. 0110
+     &0001
+      0000
+      
