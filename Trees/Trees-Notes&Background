@@ -104,7 +104,7 @@ Breadth-first:
 When working with a tree, recursive algorithms are common
 
 -----------------------------------------------------------------------------------------------------------------------------
-BFS(breadth-first search)
+BFS(breadth-first search), DFS will be put into Graph Section
 
 
 
