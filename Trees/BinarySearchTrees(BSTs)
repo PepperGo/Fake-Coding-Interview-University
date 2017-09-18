@@ -1,0 +1,187 @@
+Binary Search Tree Review (video) (https://www.youtube.com/watch?v=x6At0nzX92o&index=1&list=PLA5Lqm4uh9Bbq-E0ZnqTIa8LRaL77ica6)
+
+(https://en.wikipedia.org/wiki/Binary_search_tree)
+A binary search tree is a rooted binary tree, whose internal nodes each store a key (and optionally, an associated value) and each have two distinguished sub-trees, commonly denoted left and right.
+The tree additionally satisfies the binary search tree property, which states that the key in each node must be greater than or equal to any key stored in the left sub-tree, and less than or equal to any key stored in the right sub-tree
+
+Some of their disadvantages are as follows:
+1. The shape of the binary search tree depends entirely on the order of insertions and deletions, and can become degenerate.
+2. When inserting or searching for an element in a binary search tree, the key of each visited node has to be compared with the key of the element to be inserted or found.
+3. The keys in the binary search tree may be long and the run time may increase.
+4. After a long intermixed sequence of random insertion and deletion, the expected height of the tree approaches square root of the number of keys, √n, which grows much faster than logn.
+
+search, insert, delete(one child, binary)
+
+Runtime: 
+After a long intermixed sequence of random insertion and deletion, 
+the expected height of the tree approaches square root of the number of keys, √n, which grows much faster than logn.
+
+------------------------------------------------------------------------------------------------------------------------------
+Series (video) (https://www.coursera.org/learn/data-structures/lecture/E7cXP/introduction)
+
+Local Search:
+Definition: A Local Search Datastructure stores a number of elements each with a key coming from an ordered set.
+            It supports operations: 
+            RangeSearch(x,y): Returns all elements with keys between x and y.
+            NearestNeighbors(z): Returns the element with keys on either side of z.
+            
+e.g:  1 4 6 7 10 13 15
+      RangeSearch(5, 12): 6 7 8
+      NearestNeighbors(3): 1 4
+    
+            We would also like to be able to modify the data structure as we go:
+            Insert(x): Adds a element with key x.
+            Delete(x): Removes the element with key x.
+
+e.g: 1 4 6 7 10 13 15
+     Insert(3): 1 3 4 6 7 10 13 15
+     Delete(10): 1 3 4 6 7 13 15
+     
+To implement these operations:
+       HashTable: RangeSearch: Impossible
+                  NearestNeighbors: Impossible
+                  Insert: O(1)
+                  Delete: O(1)
+                  
+       Array:     RangeSearch: O(n) not good
+                  NearestNeighbors: O(n) not good
+                  Insert:  O(1)
+                  Delete:  O(1)
+       
+       Sorted Array: RangeSearch: O(log(n)) (binary Search)
+                     NearestNeighbors: O(log(n))
+                     Insert:   O(n) not good (some need to shift over 1)
+                     Delete:   O(n) not good (some need to shift over 1)
+                     
+       LinkedList: RangeSearch: O(n) not good
+                   NearestNeighbors: O(n) not good
+                   Insert:  O(1)
+                   Delete:  O(1)
+                   
+////////////////////////////////////////////////////////////////////
+Search Trees (https://www.coursera.org/learn/data-structures/lecture/sWTmk/search-trees)
+Binary Search --> Search a array -->  Search Tree (is much easier to insert into) 
+  
+Search Tree: Root node, left subtree smaller keys, right subtree bigger keys
+
+Tree Node Data Type: 
+           Key
+           Parent
+           Left Child
+           Right Child
+Search Tree property: X's key is larger than the key of any descendent of its left child, and smaller than the key of any descendant of its right child. 
+
+/////////////////////////////////////////////////////////////////////////
+Basic Operations(https://www.coursera.org/learn/data-structures/lecture/T3oPE/basic-operations)
+
+Find: Input: Key k, Root R
+      Output: The node in the tree of R with key
+        
+      Find(k, R)
+      if R.key = k:
+          return R
+      else if R.key > k:
+          return Find(k, R.Left)
+      else if R.key < k:
+          return Find(k, R.Right)
+         
+Missing Key: If you stop before reaching a null pointer, you find the place in the tree where k would fit.
+
+Adjacent Elements: given a node N in a Binary Search Tree, would like to find adjacent elements.
+
+Next: Input: Noode N
+      Output: The node in the tree with the next largest key.
+      
+      Case1: If you have right child.
+      Case2: No right child.
+      
+      Next(N)
+      if N.Right != null:
+         return LeftDescendant(N.Right)
+      else:
+         return RightAncestor(N)
+      
+      LeftDescendant(N)
+      if N.left = null
+         return N
+      else:
+         return LeftDescendant(N.left)
+      
+      RightAncestor(N)
+      if N.key < N.parent.Key
+         return N.parent
+      else:
+         return RightAncestor(N.Parent)
+         
+      
+Range Search: Input: Numbers x, y, root R
+              Output: A list of nodes with key between x and y
+       
+       RangeSearch(x, y, R)
+       L <- @ //@ means empty
+       N <- Find(x, R)
+       while N.key <= y
+          if N.key >= x:
+             L <- L.Append(N)
+          N <- Next(N)
+       return L
+
+
+Insert: Input: Key k and root R
+        Output: Adds node with key k to the tree
+        
+        Insert(k, R)
+        P <- Find(k, R)
+        Add new node with key k as child of P
+        
+        
+Delete: difficuly, cannot simply deleted.
+
+        Delete(N)
+        if N.right = null:
+           Remove N, promote N.left
+        else:
+           X <- Next(N)
+           // X.left = null
+           Replace N by x, promote X.right
+           
+//////////////////////////////////////////////////////////////////////////
+Balance (https://www.coursera.org/learn/data-structures/lecture/I6Oeg/balance)
+
+Runtime: how long do Binary Search Tree Opeations take?
+
+Find:  Number of operations = O(Depth), Depth can be as bad as n
+
+Balanced Tree: 
+1. want left and right subtrees to have approximately the same size.(+1, -1)
+2. suppose perfectly balanced:
+    Each subtree half the size of its parent.
+    After log(n) levels, subtree of size 1.
+    Opeations run in O(log(n)) time.
+    
+Problem: Insertions and delettions can destroy balance!
+
+Rotation: Rebalancing, idea: rearrage tree to maintain balance.
+
+/*
+See the picture.
+          RotateRight(X)
+          P <- X.Parent
+          Y <- X.Left
+          B <- Y.Right
+          Y.Parent <- P
+          P.AppropriateChild <- Y
+          X.Parent <- Y, Y.Right <- X
+          B.Parent <- X, X.Left <- B
+*/     
+How to keep a tree balanced. AVL trees.
+          
+          
+
+
+       
+
+ 
+ 
+                     
+                   
