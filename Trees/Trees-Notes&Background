@@ -1,1 +1,106 @@
+Series: Core Trees (video) (https://www.coursera.org/learn/data-structures-optimizing-performance/lecture/ovovP/core-trees)
+ 
+ Family Trees (parent, children, children of those children)
+ Decision Trees (help to make decision)
+ Expression Trees (Evaluate value)
+ File System ( /users/ports)
+ ...
+ 
+ Different organizations -> Different Trees
+ Root is more important --> Heap
+ Organized by character frequency --> Huffman Tree
+ Organized by node ordering --> Search Trees
+ Etc..
+ 
+ ------------------------------------------------------------------------------------------------------------------------------------
+ Series: Trees (video)  (https://www.coursera.org/learn/data-structures/lecture/95qda/trees)
+ e.g.
+ Syntax Tree for a sentence
+ Syntax Tree for an expression
+ Geography Hierarchy
+ Animal Kingdom
+ Abstract Syntax Tree for code
+ Binary Search Tree
+ 
+ 
+ Tree Definition:
+ A Tree is:
+    empty or
+    a node with: a key and a list of child trees
+ 
+ Terminology:
+ Root: it's the top node of the tree
+ Child: A child has a line down directly from a parent
+ Ancestor: parent, or parent of parent, etc.
+ Descendant: child, or child of child, etc.
+ Sibling: sharing the same parent
+ Leaf: node with no children
+ Interior node: non-leaf
+ Level: 1 + num edges between root and node
+ Height: maximum depth of subtree node and farthest leaf (height of farthest leaf is 1)
+ Forest: collection of trees
+ 
+ Node contains: 
+      key
+      children: list of children nodes
+      (optional) parent
+ 
+ Binary Tree: node contains:
+      key
+      left
+      right
+      (optional) parent
+    
+ 
+ ---------------------------------------------------------------------------------------------------------------
+ Tree Traversal(https://www.coursera.org/learn/data-structures/lecture/fr51b/tree-traversal)
+ Walking a Tree: Often we want to visit the nodes of a tree in a particular order.
+ 
+ e.g, print the nodes of the tree.
+      Depth-first: We completely traverse one sub-tree before exploring a sibling sub-tree
+      Breadth-first: We traverse all nodes at one level before progressing to the next level
+      
+Depth-first: (inorder traversal)
+           InOrderTraversal(Tree)
+           if tree = nil:
+               return
+           InOrderTraversal(tree.left)
+           Print(tree.key)
+           InOrderTraversal(tree.right)
+           
+           (preorder traversal)
+           PreOrderTraversal(tree)
+           if tree = nil:
+               return
+           Print(tree.key)
+           preOrderTraversal(tree.left)
+           preOrderTraversal(tree.right)
+           
+           (postorder traversal)
+           PostOrderTraversal(tree)
+           if tree = nil:
+               return
+           PostOrderTraversal(tree.left)
+           PostOrderTraversal(tree.right)
+           Print(tree.key)
 
+One thing to note about the recursive traversal is we do have sort of under the covers, a stack that's being used. Because in a recursive call, every time we make a call back to a procedure, we are invoking another frame on the stack. So we are saving implicitly our information of where we are on the stack.            
+           
+Breadth-first:
+           
+           LevelTraversal(tree)
+           if tree = nil:
+               return
+           Queue q
+           q.Enqueue(tree)
+           while not q.Empty():
+               node <- q.Dequeue()
+               Print(node)
+               if node.left != nil:
+                  q.Enqueue(node.left)
+               if node.right != nil:
+                  q.Enqueue(node.right)
+          
+When working with a tree, recursive algorithms are common
+
+-----------------------------------------------------------------------------------------------------------------------------
