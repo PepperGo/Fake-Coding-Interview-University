@@ -1,1 +1,70 @@
+Introduction (https://www.coursera.org/learn/data-structures/lecture/2OpTs/introduction)
 
+Queue:
+A queue is an abstract data type supporting the following main operations:
+1. PushBack(e) adds an element to the back of the queue;
+2. PopFront() extracts an element from the front of the queue.
+
+Priority Queue(Informally)
+A priority queue is a generalization of a queue where each element is assigned a priority and elements come out in order by priority.
+
+Typical use case:
+(1) Scheduling jobs: 
+1. want to process jobs one by one in order of decreasing priority. While the current job is processed, new jobs mayu arrive.
+2. To add a job to the set of scheduled jobs, call Insert(job).
+3. To process a job with the highest priority, get is by calling ExtractMax().
+
+
+Priority Queue(Formally)
+Definition: priority queue is an abstract data type supporting the following main operations:
+1. Insert(p) adds a new element with priority p
+2. ExtractMax() extracts an element with maximum priority.
+
+ 
+Additional Operations:
+3. Remove(it) removes an element pointed by an iterator it.
+4. GetMax() returns an element with maximum priority(without changing the set of elements)
+5. ChangePriority(it, p) changes the priority of an element pointed by it to p.
+
+Algorithms that use priority queues:
+1. Dijsktra's algorithm: finding a shortest path in a graph
+2. Prim's algorithm: constructing a minimum spanning tree of a graph
+3. Huffman's algorithm: constructing an optimum prefix-free encoding of a string
+4. Heap sort: sorting a given sequence
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Naive Inmplementations (https://www.coursera.org/learn/data-structures/lecture/z3l9N/naive-implementations)
+
+Unsorted Array/List
+
+Insert(e): add e to the end
+           running time: O(1)
+ExtractMax(): scan the array/list
+              running time: O(n)
+
+Sorted Array:
+
+ExtractMax(): extract the last element
+              running time: O(1)
+Insert(e): find a position for e (O(log n)) by using binary search, shift all elements to the right of it by (O(n)), insert e (O(1))
+           running time: O(n)
+           
+
+Sorted List:  
+
+ExtractMax(): extract the last element
+              running time: O(1)
+Insert(e): find a position for e (O(n); cannot use binary search), insert e(O(1))
+           running time: O(n)
+           
+
+Summary:
+                          Insert             Extractmax
+Unsorted array/list        O(1)                 O(n)
+Sorted array/list          O(n)                 O(1)
+Binary heap                O(logn)              O(logn)
+
+
+              
+            
+           
