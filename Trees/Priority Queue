@@ -65,6 +65,45 @@ Sorted array/list          O(n)                 O(1)
 Binary heap                O(logn)              O(logn)
 
 
-              
+-----------------------------------------------------------------------------------------------------------
+Binary tree(Actually Binary Heap) (https://www.coursera.org/learn/data-structures/lecture/GRV2q/binary-trees)
+
+Definition: Binary max-heap is a binary tree(each node has zero, one or two children) where the value of each node is at least the values of its children/
+In other words: For each edge of the tree, the value of the parent is at least the value of the child.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Basic operations: 
+
+GetMax: return the root value; O(1)
+Insert: attach a new node to any leaf
+        this may violate the heap property
+        to fix this, we let the new node sift up
+        for this, we swap the problematic node with its parent until the property is satisfied
+        
+        invariant: heap property is violated on at most one edge
+                   this edge gets closer to root while sifting up
+        Running time: O(tree height)
+ExtractMax: replace the root with any leaf
+            again, this may violate the heap property
+            to fix it, we let the problematic node sift down
+            for this, we swap the problematic node with larger child until the heap property is satisfied
+            we swap with the larger child which automatically fixes one of the two bad edges
+            running time: O(tree height)
+ChangePriority: change the priority and let the changed element sift up or down depending on whether its priority decreased or increased
+                running time: O(tree height)
+Remove: change the priority of the element to &(& means infinity), let it sift up, and then extract maximum
+        now, call ExtractMax
+        running time: O(tree height)
+        
+Summary: GetMax works in time O(1), all other operations work in time O(tree height)
+         We definitely want a tree to be shallow(complete binary tree).
+         
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Complete Binary Trees(https://www.coursera.org/learn/data-structures/lecture/gl5Ni/complete-binary-trees)
+How to keep a tree shallow? (Complete Binary trees != AVL tree)
+Definition: A binary tree is complete if all its levels are filled except possibly the last one which is filled from left to right.
+!!!!!!!! 1. The last level is filled from left to right!!!!!!
+!!!!!!!! 2. Other levels are filled!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        
             
            
