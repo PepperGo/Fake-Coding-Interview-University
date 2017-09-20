@@ -104,6 +104,83 @@ Definition: A binary tree is complete if all its levels are filled except possib
 !!!!!!!! 1. The last level is filled from left to right!!!!!!
 !!!!!!!! 2. Other levels are filled!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        
-            
-           
+1. First Advantage: Low Height
+Lemma: A complete binary tree with n nodes has height at most O(logn)
+
+2. Second Advantage: Store as Array
+   parent(i) = i/2]
+   leftchild(i) = 2i
+   right child(i) = 2i + 1
+   
+What do we pay for these advantages?
+We need to keep the tree complete.
+
+Which binary heap operations modify the shape of the tree?
+Only Insert and ExtractMax(Remove changes the shape by calling ExtractMax).
+
+Keep the Tree complete:
+to insert an element, insert it as a leaf in the leftmost vacant position in the last elvel and let is sift up.
+to extract the  maximum value, replace the root by the last leaf and let it sift down.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Pseudocode(https://www.coursera.org/learn/data-structures/lecture/HxQo9/pseudocode)
+
+General Setting:
+maxSize: is the maximum number of elements in the heap
+size: is the size of the heap
+H[1 ... maxSize] is an array of length maxSize where the heap occupies the first size elements
+
+   parent(i) = i/2]
+   leftchild(i) = 2i
+   right child(i) = 2i + 1
+
+SiftUp(i):
+while i > 1 and H[Parent(i)] < H[i]:
+    swap H[Parent(i)] and H[i]
+    i <- Parent(i)
+    
+SiftDown(i):
+maxIndex <- i
+l <- LeftChild(i)
+if l <= size and H[l] > H[maxIndex]:
+   maxIndex <- l
+r <- RightChild(i)
+if r <= size and H[r] > H[maxIndex]:
+   maxIndex <- r
+if i != maxIndex:
+   swap H[i] and H[maxIndex]
+   SiftDown(maxIndex)
+
+Insert(p):
+if size = maxSize:
+   return ERROR
+size <- size + 1
+H[size] <- p
+SiftUp(size)
+
+ExtractMax():
+result <- H[i]
+H[i] <-H[size]
+size <- size - 1
+SiftDown(1)
+return result
+
+Remove(i)
+H[i] <- @
+SiftUp(i)
+ExtractMax()
+
+ChangePriority(i, p)
+oldp <- H[i]
+H[i] <- p
+if p > oldp:
+   SiftUp(i)
+else:
+   SiftDown(i)
+   
+Summary:
+The resulting implementation is:
+1. fast: all operations work in time O(log n) (GetMax even works in O(1))
+2. space efficient: we store an array of priorities; parent-child connections are not stored, but are computed on the fly
+3. easy to implement: all operations are implemented in just a few lines of code
+
