@@ -50,6 +50,97 @@ BuildHeap(A[1..n])
 size <- n
 for i from n/2] downto 1:
     SiftDown(i)
+
+//SiftDown from document: Priority queue
+SiftDown(i):
+maxIndex <- i
+l <- LeftChild(i)
+if l <= size and H[l] > H[maxIndex]:
+   maxIndex <- l
+r <- RightChild(i)
+if r <= size and H[r] > H[maxIndex]:
+   maxIndex <- r
+if i != maxIndex:
+   swap H[i] and H[maxIndex]
+   SiftDown(maxIndex)
     
-    
-    
+We repair the heap property going from bottom to top.
+Initially, the heap property is satisfied in all the leaves(i.e., subtrees of depth 0)
+We then start repairing the heap property in all subtrees of depth 1.
+When we reach the root, the heap property is satisfied in the whole tree.
+
+BuildHeap: Runningtime: O(nlog n)
+
+2. In-place Heap Sort//no additional memeory
+HeapSort(A[1..n])
+BuildHeap(A) //size = n
+repeat(n - 1) times:
+   swap A[1] and A[size]
+   size <- size - 1 //decrease size
+   SiftDown(1)
+   
+HeapSort: Runningtime: O(nlogn)
+   
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+Building a Heap (https://www.coursera.org/learn/data-structures/lecture/dwrOS/building-a-heap)
+
+The running time of BuildHeap is O(nlogn) since we call SiftDown for O(n)nodes.
+If a node is already close to the leaevs, then sifting it down is fast.
+We have many such nodes.
+Was our estimate of the running time of buildHeap too pessimistic?
+
+Building Running Time: 
+         #nodes              T(SiftDown)
+           1                     log n
+           2            
+           ...
+           <= n/4                 2
+           <= n/2                 1
+
+T(BuildHeap) <= n/2*1 + n/4* 2 + n/8*3 +...
+             <=..
+             = 2n
+             
+Estimating the sum:
+1/2 + 1/4 + 1/8 +  ... = 1
+
+1/2 + 2/4 + 3/8 + 4/16 + ... = k/(2^k) k from 1 to infinity = 2
+
+Partial Sorting:
+Input: An array A[1...n], an integer 1<= k <= n.
+Output: The last k elements of a sorted version of A.
+Can be solved in O(n) if k = O(n/logn) !
+
+PartialSorting(A[1..n], k)
+BuildHeap(A)
+from i from 1 to k:
+   ExtractMax()
+   
+Running time: O(n + klogn) = O(n) if(k = O(n/logn))
+
+Summary:
+Heap sort is a time and space efficient comparison-based algorithm: has running time O(nlogn), uses no addtional space.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Final Remarks (Final Remarks)
+
+Binary Min-Heap:
+Definition: Binary min-heap is a binary tree(each node has zero, one or two children) where the value of each node is at most the values of its children.
+Can be implemented similarly.
+
+d-ary Heap:
+In a d-ary heap, nodes on all levels except for possibly the last one have exactly d children.
+The height of such a tree is about logd(n).
+The running rime of SiftUo is O(logd(n))
+The running time of SiftDown is O(dlogd(n)): on each level, we find the largest value amond d children.
+
+Summary:
+Priority queue supports two main operations: Insert and ExtractMax.
+In an array/list implementation one operation is very fast (O(1)) but the other one is very slow(O(n))
+Binary heap gives an implementation where both operations take O(logn) time.
+Can also made space efficient.
+
+
+
+
