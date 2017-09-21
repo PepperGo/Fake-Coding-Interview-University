@@ -2,3 +2,54 @@ Heap Sort - jumps to start (video) 55"
 (https://www.youtube.com/watch?v=odNJmw5TOEE&feature=youtu.be&list=PLFDnELG9dpVxQCxuD-9BSy2E7BWY3t5Sm&t=3291)
 
 HeapSort(nlog n)
+
+Heap:
+                running time
+GetMax             O(1)
+Insert             O(log n)
+Delete             O(log n)
+Update             O(log n)
+
+Heap is perfect for priority queue.
+
+HeapSort:
+
+               Sorted array                    Unsorted array
+GetMax             O(1)                               O(n)
+Insert             O(n)                               O(1)
+Delete             O(n)                               O(n)
+Update             O(n)                               O(n)
+
+
+/*
+Given a Heap --> How to sort?
+Idea: Exchange the largest one(index: 0) with the last one(index: n - 1) in the array
+      Exchange the second largest(larger between index: 1 and index: 2) with first one(index: 0)
+
+*/
+
+---------------------------------------------------------------------------------------------------------------------------
+Heap Sort (video) (https://www.coursera.org/learn/data-structures/lecture/hSzMO/heap-sort)
+
+HeapSort(A[1...n])
+create an empty priority queue
+for i from 1 to n:
+     Insert(A[i])
+for i from n downto 1:
+     A[i] <- ExtractMax()
+     
+The resulting algorithm is comparison-based and has running time O(logn)(hence, asymptotically optimal!!)
+Natural generalization of selection sort: instead of simply scanning the rest of the array to find the maximum value, use a smart data structure.
+Not in-place(disadvantage): uses additional space to store the priority queue
+
+
+In-place heap sort algorithm. For this, we will first turn a given array into a heap by permuting its elements.
+1. Turn array into a heap
+
+BuildHeap(A[1..n])
+size <- n
+for i from n/2] downto 1:
+    SiftDown(i)
+    
+    
+    
