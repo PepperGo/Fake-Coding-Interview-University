@@ -184,3 +184,13 @@ The resulting implementation is:
 2. space efficient: we store an array of priorities; parent-child connections are not stored, but are computed on the fly
 3. easy to implement: all operations are implemented in just a few lines of code
 
+------------------------------------------------------------------------------------------------------------------------
+Lecture 24: Priority Queues(https://archive.org/details/ucberkeley_webcast_yIUFT6AKBGE)
+Entries consist of key and value.
+A total order is defined on the keys. 
+Operations:
+1. Identify or remove entry whose key is lowest.(but no other entry)
+2. Any key may be inserted at any time.
+3. //04"07'
+
+
