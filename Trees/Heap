@@ -27,3 +27,4 @@ This allows moving up or down the tree by doing simple index computations.
 Balancing a heap is done by sift-up or sift-down operations (swapping elements which are out of order). As we can build a heap from an array without requiring extra memory (for the nodes, for example), heapsort can be used to sort an array in-place.
 
 
+
