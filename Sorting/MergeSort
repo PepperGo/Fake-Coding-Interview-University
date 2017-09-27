@@ -1,0 +1,50 @@
+//https://www.youtube.com/watch?v=4nKwesx_c8E&list=PLe-ggMe31CTeunC6GZHFBmQx7EKtjbGf9&index=1
+Basic Idea:
+1. Divide array into two halves
+2. Recursively sort each half.
+3. Merge two halves.
+
+
+
+Goal： Given two sorted subarrays a[lo] to a[mid] and a[mid+1] to a[hi], replace with sorted subarray a [lo] to a[hi].
+
+k, i , j(perimeter)
+
+private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi){
+	assert isSorted(a, lo, mid); //precondition: a[lo..mid] sorted
+	assert isSorted(a, mid + 1, hi);//precondition: a[mid+1..hi] sorted
+	
+	for(int k = lo; k <= hi; k++)
+		aux[k] = a[k];   //copy
+	
+	int i = lo, j = mid + 1;
+	
+	for(int k = lo; k <= hi; k++){  //merge
+		if( i > mid)
+			a[k] = aux[j++];
+		else if(j > hi)
+			a[k] = aux[j++];
+		else if(less(aux[j], aux[i]))
+			a[k] = aux[j++];
+		else
+			a[k] = aux[i++];
+			
+	}
+	assert isSorted(a, lo, hi);
+}
+
+Assertions:
+Assertion. Statement to test assumptions about your program.
+1. help detect logic bugs.
+2. documents code.
+
+Java assert statement. Throws exception unless boolean condition is true.
+
+Can enable or disable at runtime.(No cost in production code)
+
+Best practices: Use assertions to check internal incariants; assume assertions will be disabled in production code.
+
+
+
+
+
