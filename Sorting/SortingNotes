@@ -1,1 +1,22 @@
+Stability:
+A sorting algorithm is stable if whenever there are two records R and S with the same key, and R appears before S in the original list, then R will always appear before S in the sorted list.
+(Not all sorting algorithms are stable)
+Some sorting algorithms are stable by nature like Insertion sort, Merge Sort, Bubble Sort, etc. And some sorting algorithms are not, like Heap Sort, Quick Sort, etc.
+e.g.
+Suppose we have a list of 5-letter words:
+
+peach
+straw
+apple
+spork
+If we sort the list by just the first letter of each word then a stable-sort would produce:
+
+apple
+peach
+straw
+spork
+In an unstable sort algorithm, straw or spork may be interchanged, but in a stable one, they stay in the same relative positions (that is, since straw appears before spork in the input, it also appears before spork in the output).
+
+(http://www.geeksforgeeks.org/stability-in-sorting-algorithms/)
+
 
