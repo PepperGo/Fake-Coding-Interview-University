@@ -45,6 +45,105 @@ Can enable or disable at runtime.(No cost in production code)
 Best practices: Use assertions to check internal incariants; assume assertions will be disabled in production code.
 
 
+public class Merge{
+	private static void merge(...){
+		//as before
+	}
+	
+	private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi){
+		if(hi <= lo) return;
+		int mid = (lo + hi)/2;
+		sort(a, aux, low, mid);
+		sort(a, aux, mid + 1, hi);
+		merge(a, aux, lo, mid, hi);
+	}
+	
+	public static void sort(Comparable[] a){
+		aux = new Comparable[a.length];
+		sort(a, aux, 0, a.length - 1);
+	}
+}
+
+Number of compares and array accesses:
+       Mergesort uses at most NlogN compares and 6NlogN array accesses to sort any array of size N.
+       
+Proposition. If D(N) satisfies D(N) = 2D(N/2) + N for N > 1, with D(1) = 0, then D(N) = NlgN.
+
+Memory: MergeSort uses extra space proportional to N.
+
+Definition: A sorting algorithm is in-place if it uses <= clogN extra memory.
+e.g Insertion sort, selection sort, shellsort
+
+
+Improvement:
+1. use insertion sort for small subarrays.(Cutoff to insertion sort for = 7 items)
+
+	private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi){
+		// if(hi <= lo + CUTOFF - 1) Insertion.sort(a, lo, hi).
+		int mid = (lo + hi)/2;
+		sort(a, aux, low, mid);
+		sort(a, aux, mid + 1, hi);
+		merge(a, aux, lo, mid, hi);
+	}
+
+2. Stop if already sorted.
+  a. Is biggest item in first half <= smallest item in second half?
+  b. Helps for partially-ordered arrays.
+  
+	private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi){
+		// if(hi <= lo + CUTOFF - 1) Insertion.sort(a, lo, hi).
+		int mid = (lo + hi)/2;
+		sort(a, aux, low, mid);
+		sort(a, aux, mid + 1, hi);
+		//if(!less(a[mid+1], a[mid])) return;
+		merge(a, aux, lo, mid, hi);
+	}
+
+3. Eliminate the copy to auxiliary array. Save time (but not space) by switching the role of the input and auxiliary array in each recursive call.
+
+public class Merge{
+	
+	private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi){
+		int i = lo, j = mid + 1;
+	
+	    for(int k = lo; k <= hi; k++){  //merge from a[] to aux[]
+		    if( i > mid)
+			    aux[k] = a[j++];
+		    else if(j > hi)
+			    aux[k] = a[i++];
+		    else if(less(a[j], a[i])) 
+			    aux[k] = a[j++];
+		    else
+			    aux[k] = aux[i++];
+		}
+		
+	}
+	
+	private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi){
+		if(hi <= lo) return;    //switch role of aux[] and a[]
+		int mid = (lo + hi)/2;
+		sort(aux, a, low, mid);
+		sort(aux, a, mid + 1, hi);
+		merge(aux, a, lo, mid, hi);  
+	}
+	
+	public static void sort(Comparable[] a){
+		aux = new Comparable[a.length];
+		sort(a, aux, 0, a.length - 1);
+	}
+}
+
+
+
+
+
+
+	
+  
+   
+
+
+
 
 
 
