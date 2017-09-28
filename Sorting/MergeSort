@@ -137,6 +137,30 @@ public class Merge{
 
 
 
+Bottom-up mergesort:
+
+Basic plan:
+1. Pass through array, merging subarrays of size
+2. Repeat for subarrays of size 2, 4, 8, 16, ...
+
+Bottom line: No recusion.
+
+public class MergeBU{
+	private static Comparable[] aux;
+	
+	private static void merge(Comparable[] a, int lo, int mid, int hi){
+		//as before
+	}
+	
+	public static void sort(Comparable[] a){
+		int N = a.length;
+		aux = new Comparable[N];
+		for(int sz = 1; sz < N; sz = sz+sz)
+			for(int lo = 0; lo < N - sz; lo += sz+sz)
+				merge(a, lo, lo+sz-1, Math.min(lo+sz+sz-1, N -1));
+	}
+}
+
 
 	
   
