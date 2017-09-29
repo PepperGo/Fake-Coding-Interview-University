@@ -136,6 +136,7 @@ public class Merge{
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////
 
 Bottom-up mergesort:
 
@@ -160,6 +161,125 @@ public class MergeBU{
 				merge(a, lo, lo+sz-1, Math.min(lo+sz+sz-1, N -1));
 	}
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+Sorting complexity:
+Computational complexity： Framework to study efficiency of algorithms for solving a particular problem X.
+
+Model of computation: Allow operations.
+Cost model: Operation counts
+Upper bound: Cost gurantee provided by some algorithm for X.
+Lower bound: Proven limit on cost guarntee of all algorithms for X.
+Optimal algorithm: Algorithm with best possible cost guarantee for X.
+
+
+Compare-based lower bound for sorting(by Decision Tree):
+Propsition: Any compare-based sorting algorithm must use at least lg(N!) ~ NlgN compares in th worst-case.
+Proof:
+     Binary tree of height h has at most 2^h leaves.
+     N! different orderings -> at least N! leaves
+     2^h >= #leaves >= N!
+     --> h >= lg(N!) ~ NlgN
+
+Example:
+Model of computation: decision tree
+Cost model: #compares
+Upper bound: ~NlgN from mergesort
+Lower bound: ~NlgN
+Optimal algorithm: = mergesort(lower bound == upper bound)
+
+Compares: Mergesort is optimal with respect to # compares
+Space: Mergesort is not optimal with respect to space usage
+
+Lower bound may not hold if the algorithm has information about:
+1. The initial order of the input
+2. The distribution of key values
+3. The representation of keys
+
+Partially-ordered arrays: Depending on the initial order of the input, we may not need NlgN compares
+
+Duplicate keys: Depending on the input distribution of duplicates, we may not need NlgN compares
+
+Digital properties of keys: We can use digit/character compares instead of key compares for numbers and strings.
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+Comparators
+
+Comparator interface: sort using an alternate order.
+               public interface Comparator<Key>{
+	          int compare(Key v, Key w)
+	       }
+
+Required property: Must be a total order.
+
+To use with Java system sort:
+    Create Cmparator object.
+    Pass as second argument to Ararys.sort()
+    
+To support comparators in our sort implementations:
+1. Use Object instead of Comparable.
+2. Pass Comparator to sort() and less() and use it in less()
+
+public static void sort(Object[] a, Comparator comparator){
+	int N = a.length;
+	for(int i = 0; i < N; i++)
+		for(int j = i; j > 0 && less(comparator, a[j], a[j-1]); j--)
+			exch(a, j, j - 1);
+}
+
+private static boolean less(Comparator c, Object v, Object w){
+	return c.compare(v, w) < 0;
+}
+
+private static void exch(Object[] a, int i, int j){
+	Object swap = a[i];
+	a[i] = a[j];
+	a[j] = swap;
+}
+
+To implement a comparator:
+1. Define a (nested class) that implements the Comparator interface.
+2. Implement the compare() method.
+
+
+public class Student{
+	public static final Comparator<Student> BY_NAME = new ByName();
+	public static final Comparator<Student> BY_SECTION = new BySection();
+	
+	private final String name;
+	private final int section;
+	
+	private static class ByName implements Comparator<Student>{
+		public int compare(Student v, Student w){
+			return v.name.compareTo(w.name);
+		}
+	}
+	
+	private static class BySection implements Comparetor<Student>{
+		public int compare(Student v, Student w){
+			return v.section - w.section;
+		}
+			
+	}
+}
+
+Arrays.sort(a, Student.BY_Name);
+Arrays.sort(a, Student.BY_SECTION);
+
+/////////////////////////////////////////////////
+Stability:
+A stable sort preserves  the relative order of teh items with equal keys.
+
+Which sorts are stable?
+1. Insertion sort and mergesort. (But not selection sort or shellsort)
+
+Mergesort: merge operation is stable.(takes from the left subarray of equal keys)
+Insertion sort: Equal items never move past each other.
+Selction sort & Shellsort: Long-distance exchange might move an item past some equal item.
+
+
 
 
 	
