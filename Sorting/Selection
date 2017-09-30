@@ -1,1 +1,19 @@
+Related to quicksort
+
+Selection:
+
+Goal: Given an array of N items, find the kth largest.
+Ex. Min(k = 0), Max(k = N - 1), median( k = N/2)
+
+Applications
+    Order statistics.
+    Find the "top k"
+    
+    
+Use theory as a guide:
+     Easy NlogN upper bound.
+     Easy N upper bound for k = 1, 2, 3.
+     Easy N lower bound.
+     
+Quick-select(based on partitioning)
 
