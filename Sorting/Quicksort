@@ -1,1 +1,136 @@
+QuickSort(https://www.youtube.com/playlist?list=PLe-ggMe31CTeE3x2-nF1-toca1QpuXwE1)
+Mergesort: Java sort for objects
+Quicksort: Java sort for primitive types
+//////////////////////////////////////////////////////////////////////////////////////////////
+Quicksort:
+
+Basci plan:
+      Shuffle the array
+      Partition so that, for some j
+         entry a[j] is in place
+         no larger entry to the left of j
+         no smaller entry to the right of j
+      Sort each piece recursively
+      
+Demo:
+    Phase 1. Repeat until i and j pointers cross
+          Scan i from left to right so long as (a[i] < a[lo]).  //lo is the leftmost index
+          Scan j from right to left so long as (a[j] > a[lo]).
+          Exchange a[i] with a[j]
+    Phase 2. When pointers cross.
+          Exchange a[lo] with a[j]
+          
+Java code:
+
+private static int partition(Comparable[] a, int lo, int hi){
+	int i = lo, j = hi + 1;
+	while(true){
+		while(less(a[++i], a[lo]))   //find item on left to swap
+			if(i == hi) break;
+	  while(less(a[lo], a[--j]))   //find item on right to swap
+			if(j == lo) break;
+	    
+    if(i >= j) break;
+		exch(a, i, j);
+ 	}
+	exch(a, lo, j);
+	return j;
+}
+
+Class:
+
+public class Quick{
+	private static int partition(Comparable[] a, int lo, int hi){
+		//as previous 
+	}
+	
+	public static void sort(Comparable[] a){
+		StdRandom.shuffle(a);
+		sort(a, 0, a.length - 1);
+	}
+	
+	private static void sort(Comparable[] a, int lo, int hi){
+		if(hi <= lo) return;
+		int j = partition(a, lo, hi);
+		sort(a, lo, j - 1);
+		sort(a, j+1, hi);
+	}
+}
+
+
+Quicksort trace: See video
+
+Implementation details:
+   partitioning in-place: Using an extra array makes partitioning easier(and stable), but is not worth the cost.
+   Terminating the loop: Testing whether the pointers cross is a bit tricker than it might seem.
+   Staying in bounds: The (j == lo) test is redundant, but the (i == hi) test is not.
+   Preserving randomness: Shuffling is needed for performance guarantee.
+   Equal keys: When duplicates are present, it is (counter-intuitively) better to stop on keys equal to the partitioning item's key.
+   
+Empirical analysis:
+
+Running time estimates:
+         Best case: Number of compares is ~NlogN
+         Worst case: Number of compares is ~1/2 * N^2 (N + N -1 + N - 2 + ... + 1)
+         Average-case: The average number of compares Cn to quicksort an array of N distinct keys is ~2NlnN(and the number of exchanges is ~1/3 NlnN)
+                        ~1.39NlgN
+                       Quicksort has 39% more compares than mergesort.
+                       But faster than mergesort in parctice because of less data movement.
+         
+Proposition. 
+          Quicksort is an in-place sorting algorithm.(in-place algorithm is an algorithm which transforms input using no auxiliary data structure. )
+          Pf.
+              Partitioning: constant extra space.
+              Depth of recursion: logarithmic extra space(with high probability)
+          
+          Propostition: Quicksort is not stable
+          
+          
+Pratical improvements:
+    1. Insertion sort small subarrays.
+          Even quicksort has too much overhead for tiny subarrays.
+          Cutoff to insertion sort for 10 items
+          Note: could delay insertion sort until one pass at end.
+          
+          if(hi <= lo + CUTOFF - 1){
+               Insertion.sort(a, lo, hi);
+               return;
+          }
+              
+     2. Median of sample.
+          Best choice of pivot item = median.
+          Estimate true median by taking median of sample.
+          Median-of-3(random) items
+          
+          int m = medianOf3(a, lo, lo + (hi - lo)/2, hi);
+          swap(a, lo, m);
+        
+	public long medianOf3(int left, int right) {
+		int center = (left + right) / 2;
+		// order left & center
+		if (theArray[left] > theArray[center])
+			swap(left, center);
+		// order left & right
+		if (theArray[left] > theArray[right])
+			swap(left, right);
+		// order center & right
+		if (theArray[center] > theArray[right])
+			swap(center, right);
+
+		swap(center, right - 1); // put pivot on right
+		return theArray[right - 1]; // return median value
+	} // end medianOf3()
+        
+ 
+ //////////////////////////////////////////////////////////////////////
+ Selection
+ 
+ 
+         
+    
+
+
+          
+
+
 
