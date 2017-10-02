@@ -126,9 +126,55 @@ Pratical improvements:
  See Selection file
  
  
-         
-    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Duplicate keys:
+Often, purpose of sort is to bring items with equal keys together.
 
+Mergesort with duplicate keys: Always between 1/2NlgN and NlgN compares
+
+Quicksort with duplicate keys: Algorithm goes quadratic unless partitioning stops on equal keys!
+
+Duplicate keys: the problem
+
+Mistake: Put all items equal to the partitioning item on one side.
+Consequence: ~1/2N^2 compares when all keys equal.
+
+Recommended: Stop scans on items equal to the partitioning item.
+Consequence: ~NlogN compares when all keys equal.
+
+Desirable: Put all items equal to the partitioning item in place.
+
+3-way partitioning:
+Goal. Partition array into 3 parts so that:
+      1. Entries between lt and gt equal to partition item v.
+      2. No larger entries to left of lt.
+      3. No smaller entries to right of gt.
+      
+Demo: 1. Let v be partitioning item a[lo]
+      2. Scan i from left to right
+      -(a[i] < v): exchange a[lt] with a[i]; increment both lt and i
+      -(a[i] > v): exchange a[gt] with a[i]; decrement gt
+      -(a[i] == v): increment i
+      
+      // array stucture: < v, lt,  = v, i, ..., gt, > v
+
+ 
+ private static void sort(Comparable[] a, int lo, int hi){
+     if(hi <= lo) return;
+     int lt = lo, gt = hi;
+     Comparable v = a[lo];
+     int i = lo;
+     while(i <= gt){
+        int cmp = a[i].compareTo(v);
+	if (cmp < 0) exch(a, lt++, i++);
+	else if(cmp > 0) exch(a, i, gt--);
+	else i++
+     }
+     sort(a, lo, lt - 1);
+     sort(a, gt + 1, hi);
+ }
+    
+Duplicate keys: lower bound at least
 
           
 
