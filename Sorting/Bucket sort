@@ -1,0 +1,33 @@
+CS 61B Lecture 32: Sorting III (https://archive.org/details/ucberkeley_webcast_Y6LOLpxg6Dc)
+Bucket sort:
+    Work when keys are in small range, e.g. 0 to q - 1 ---> i.e. when q ∈ O(n)
+    
+    Array of q queues, numberd from 0 to q - 1
+    Enqueue each item: key i goes in queue i
+    
+    Demo: 38'50"
+    Input: 6:a  7:b  3:c  0:d  3:e  1:f  5:g  0:h  3:i  7:j 
+    Queues: index  0  1  2  3  4  5  6  7
+    
+    That queue likes hashtable(bucket)
+    
+    Concatenate queues all together in order
+    
+    Running time: θ(q + n) time (both best case and worst case)
+    θ(q) time to initialize and concatenate buckets
+    θ(n) time to put items in buckets
+    
+    If q∈O(n), total time is θ(n) time.
+    
+    
+    Bucket sort is stable: items with equal keys come out in same order they went in.
+    Insertion selectin, mergesort are easily made stable.
+    Linked list quicksort can too, array quicksort cannot.
+    Heapsort is never stable.
+    
+    
+    
+    
+    
+    
+    
