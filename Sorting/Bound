@@ -13,3 +13,15 @@ A LOWER BOUND ON COMPARISION-BASED SORTING
       log(n^n) = nlogn
       
       so log(n!) = ~&(nlogn)
+
+
+Comparision-based sort: all decisions based on comparing keys("if" statements).
+A correct sorting algorithm must generate a different sequence of true/false answer for each permutation of 1...n.
+If algorithm asks at most d true/false questions, it generates at most 2^d different sequences of true/false answers.
+            n! <= 2^d
+            log(n!) <= d
+
+
+Every Comparision-based sorting algorithm takes Ω(nlogn) worst-case time.
+
+Fast algorithms make q-way decisions for large q.  --> Linear-time sorting
