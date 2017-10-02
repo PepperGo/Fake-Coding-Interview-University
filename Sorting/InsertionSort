@@ -1,0 +1,17 @@
+CS 61B Lecture 29: Sorting I (https://archive.org/details/ucberkeley_webcast_EiUvYS2DT6I)
+Insertion Sort: O(n^2) time
+    Start with empty list S & unsorted list I of n items.
+    for(each item x in I){
+         insert x into S, in sorted order
+    }
+ If S is linked list, &(n) worst-cast time to find right position.   
+ If S is array, logn time to find the position, but n time to shuffle, so &(n) worst-cast time to shift higher items over.
+ 
+ If S is array, insertion sort is in-place.  one array: I --> S & I
+ 
+ If S is a balanced search tree, running time O(nlogn)
+ 
+ 
+
+    
+    
