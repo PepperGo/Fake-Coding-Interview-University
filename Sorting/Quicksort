@@ -27,10 +27,10 @@ private static int partition(Comparable[] a, int lo, int hi){
 	while(true){
 		while(less(a[++i], a[lo]))   //find item on left to swap
 			if(i == hi) break;
-	  while(less(a[lo], a[--j]))   //find item on right to swap
+	        while(less(a[lo], a[--j]))   //find item on right to swap
 			if(j == lo) break;
 	    
-    if(i >= j) break;
+        if(i >= j) break;
 		exch(a, i, j);
  	}
 	exch(a, lo, j);
@@ -177,6 +177,98 @@ Demo: 1. Let v be partitioning item a[lo]
 Duplicate keys: lower bound at least
 
           
+-------------------------------------------------------------------------------------------------
+QuickSort: https://archive.org/details/ucberkeley_webcast_2hTY3t80Qsk (it's quite different from the verison on the top)
 
+QuickSort: Recursive divide-and-conquer algorithm
+           Fastest comparision-based sort for arrays
+	   &(n^2) worst-case time
+	   Virtually, always O(nlogn) in practice
+	   
+	   Start with list I of n items.
+	   Choose pivot item v from I.
+	   Partition I into 2 unsorted lists I1&I2
+	   --I1: All keys smaller than v's key
+	   --I2: All keys bigger than v's key
+	   --Items: same key as v can go into either list
+	   --The pivot v does not go into either list
+	   
+	   Sort I1 recursively, yielding sorted list S1
+	   Sort I2 recursively, yielding sorted list S2
+	   Concatenate S1, v, S2, yielding sorted list S
+	   
+	   Demo:8'51"
+	   
+Quicksort on unsorted array: num of level: logn, time: O(nlogn) 
+Quicksort on sorted array: num of level: n, time: O(n^2)	
+          When input already sort, choosing first item as pivot is disastrous.
 
+Choosing a pivot: 
+                  Randomly select an item from I as pivot.
+                  On average, 1/4, 3/4 split, average running time O(nlogn)
+		  "median-of-three"
+		  
 
+Quicksort on linked lists.
+     Suppose we put all items with same key as v into I1, not useful
+     
+     Better partition I into 3 lists I1, I2, Iv
+     Iv contains pivot & all items with same key as v
+     Sort I1&I2, not Iv. Concatenate S1, Iv, S2
+     
+     Demo
+     
+Quicksort on arrays.
+     In-place is fast.
+     Array a.
+     Sort items a[low]...a[high]
+     We choose pivot v; swap it with last item a[high]
+     
+     Demo
+     3 8 0 9 5 7 4
+     pivot: 5
+     3 8 0 9 4 7 5
+     
+     Invariants: 
+       1. All items left of index i have a key <= pivot
+       2. All items right of index j have a key >= pivot
+       
+     Adavance i to key >= pivot
+     Decrement j to key s <= pivot
+     
+                              3 8 0 9 4 7 5			     
+    swap items at i & j       3 4 0 9 8 7 5
+                                i     j  pivot
+    Repeat until i>= j        3 4 0 9 8 7 5
+                                  j i
+    Swap pivot back to middle 3 4 0  5  8 7 9
+    
+    Items with same key as pivot?(problem)
+    
+    public static void quicksort(Comparable[] a, int low, int high){
+       if(low < high){
+                int pivotIndex = random number from low to high;
+		Comparable pivot = a[pivotIndex];
+		a[pivotIndex] = a[high];
+		a[high] = pivot;
+		
+		int i = low - 1;
+		int j = high;
+		
+		do{
+		   do{i++;} while(a[i].compareTo(pivot) < 0);
+		   do{j--;} while(a[i].compareTo(pivot) > 0) && (j > low);
+		   if(i < j){
+		      swap a[i] and a[j];
+		   }
+		}while(i < j);
+		
+		a[high] = a[i];
+		a[i] = pivot;
+		quicksort(a, low, i - 1);
+		quicksort(a, i + 1, high);
+       }
+    }
+    
+    
+    
