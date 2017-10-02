@@ -299,8 +299,31 @@ MergeSort(headRef)
      *headRef = SortedMerge(a, b);
    
 
-
-
-
-
-
+-------------------------------------------------------------------------------------------------------
+CS 61B Lecture 29: Sorting I https://archive.org/details/ucberkeley_webcast_EiUvYS2DT6I
+MergeSort: O(nlogn) time
+   
+ Merge 2 sorted lists into one sorted list in linear time.
+    Let Q1 & Q2 be 2 sorted queues.
+    Let Q be empty queue.
+    while(neither Q1 nor Q2 is empty){
+          item1 = Q1.front();
+	  item2 = Q2.front();
+	  move smaller of item1, item2 from present queue to end of Q
+    }
+    concatenate remaining non-empty queue (Q1 or Q2) to end of Q.
+    
+ Mergesort is a recursice divide-and-conquer algorithm.
+    Start wieh unsorted list I of n items.
+    Break I into halves I1 & I2, having [n/2 & n/2] items.
+    Sort I1 recursively, yielding S1
+    Sort I2 recursively, yielding S2
+    Merge S1&S2 into one sorted list S.
+    
+ Natural for linked lists.
+ Not inplace sort for arrays.
+ 
+ 
+ 
+    
+  
