@@ -11,9 +11,38 @@ Applications
     
     
 Use theory as a guide:
-     Easy NlogN upper bound.
+     Easy NlogN upper bound. //(first sort the array, then find the ith largest one)
      Easy N upper bound for k = 1, 2, 3.
-     Easy N lower bound.
+     Easy N lower bound. (Or will miss some items)
      
 Quick-select(based on partitioning)
+  Partition array so that: 
+     1. Entry a[j] is in place.
+     2. No larger entry to the left of j
+     3. No smaller entry to the right of j
+  Repeat in one subarray, depending on; finished when j equals k
+  
+  public static Comparable select(Comparable[] a, int k){ // like quick sort
+        StdRandom.shuffle(a);
+        int lo = 0, hi = a.length - 1;
+        while(hi > lo){
+            int j = partition(a, lo, hi);
+            if(j < k) lo = j + 1;
+            else if(j > k) hi = j - 1;
+            else  return a[k];
+        }
+        return a[k];
+  }
+    
+
+Quick-select: mathematical analysis.
+Propostition. Quickselct takes linear time on average.
+Proof: N + N/2 + N/4 + ... + 1 = 2N compares
+
+
+Proposition: Compare-based selection algorithm whose worst-case running time is linear.
+
+
+
+
 
