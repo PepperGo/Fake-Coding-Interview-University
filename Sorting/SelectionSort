@@ -1,0 +1,21 @@
+CS 61B Lecture 29: Sorting I (https://archive.org/details/ucberkeley_webcast_EiUvYS2DT6I)
+
+Selection Sort
+    Start with empty list S & unsorted list I of n items.
+    for(i = 0; i < n; i++){
+        x <- item in I with smallest key
+        Remove x from I
+        Append x to end of S.
+    }
+    
+    
+    Whether S is array or linked list, &(n^2) time even in best case
+
+
+In place(one array): I --> S, I
+
+If S is a balanced search tree, running time is O(n logn)
+
+Replace I with heap?: See heap sort
+      
+    
