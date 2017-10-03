@@ -1,10 +1,60 @@
 CS 61B Lecture 33: Sorting V 22'30" (https://archive.org/details/ucberkeley_webcast_qNMQ4ly43p4)
 
-* RadixSort:
+  RadixSort:
      Sort 1000 items in range 0...99,999,999.    
      Provide q = 10 buckets. Sort an first digit only.
      
      
-     Bucket: 0  1  2  3  4  5  6  7  8  9
+     Bucket: 0  1  2  3  4  5   6     7  8  9
+             ↓        ↓     ↓   ↓     ↓
+          3429583  39509993 5   6   73942039
+             ↓                        ↓
+          592178                     75
+                                      ↓
+                                     78
+                                     
+     We could sort queue recursively on second digit, then on third digit, etc.
+     
+     Smaller subsets will be sorted inefficiently.
+     Clever idea: keep numbers in one pile throughout sort, sort on last digit first, then next-to-last, up tp most significant digit.
+     Works because bucket & counting sort are stable.
+     
+     Once we sort on last digit, 55,555,552 & 55,555,58 remain sorted.
+     
+     Sort on 1s: 720 450 771 822 322 505 925 5 955 925 777 858 28 829
+     sort on 10s: 504 5 720 822 925 825 21 829 332 456 955 858 771 777
+     sort on 100s: 5 21 332 456 504 720 771 777 822 825 829 858 925 955
+     
+     Faster if we sort on 2 digits at a time(radix q = 100) or 3(radix q = 1000).
+     
+     On computers, more natural to choose power-of-two radix like q = 256.
+     
+     q = # of buckets = radix of digit we use as sort key
+     
+How many passes?
+     Each pass inspects logq bits of each key.
+     e.g.    q = 256
+            log q = 8 bits
+     If all key represented in b bits, # of passes is [b/logq
+     
+Running time of radix sort: O((n+q)[(b/logq))
+
+
+How to choose q?
+     Choose q ∈ O(n), so each pass takes linear time.
+     Make q large enough --> # of passes small
+     Choose q ≈ n.
+     Radix sort takes O(n + (b/logn)*n ) time
+     
+     
+     ints: b is a constant, radix sort takes linear time.
+     Pratical choice: make q be n rounded down to power of two.
+     To keep memory use low: make q ≈ sqrt(n), rounded to nearest power of two.
+     
+     
+     
+     
+     
+     
      
      
