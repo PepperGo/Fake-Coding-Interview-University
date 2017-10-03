@@ -1,0 +1,10 @@
+CS 61B Lecture 33: Sorting V 22'30" (https://archive.org/details/ucberkeley_webcast_qNMQ4ly43p4)
+
+* RadixSort:
+     Sort 1000 items in range 0...99,999,999.    
+     Provide q = 10 buckets. Sort an first digit only.
+     
+     
+     Bucket: 0  1  2  3  4  5  6  7  8  9
+     
+     
