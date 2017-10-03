@@ -1,0 +1,13 @@
+https://www.youtube.com/watch?v=P00xJgWzz2c&index=1&list=PL89B61F78B552C1AB
+
+Bubblesort:
+        for i = (n - 1) to 1
+            for j = 0 to (i - 1)
+                if(A[j] > A[j + 1])
+                   swap(A[j], A[j + 1])
+    
+    
+    Comparisions = (n - 1) + (n - 2) + ...+ 1 = O(n^2)
+    
+    
+    
