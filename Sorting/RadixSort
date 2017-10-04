@@ -51,10 +51,81 @@ How to choose q?
      Pratical choice: make q be n rounded down to power of two.
      To keep memory use low: make q ≈ sqrt(n), rounded to nearest power of two.
      
+------------------------------------------------------------------------------------------------
+Algorithms II - StringSorts (https://www.youtube.com/watch?v=HKPrVm5FWvg&list=PLe-ggMe31CTcNvUX9E3tQeM6ntrdR8e53)
+
+Strings in java
+     * String processing
+         String: Sequence of characters
+     * C char data type: typically an 8-bit integer
+         Supports 7-bit ASCII
+         Can represent only 256 characters
+     * Java char data type: A 16-bit unsigned integer
+         Supports original 16-bit Unicode
+         Supports 21-bits Unicode 3.0
+         
+     * The String data type:
+     String data type in Java: Sequence of characters(immutable).
+     
+     Length: Number of characters  //s.length()
+     Indexing: Get the ith character.  //s.charAt(int index)
+     Substring extraction: Get a contiguous subsequence of characters   
+               s.substring(int i, int j)//index i to index j - 1
+     String concatenation: Append one character to end of another string.
+     
+     * The StringBuilder data type
+       StringBuilder data type: Sequence of characters(mutable)
+       Underlying implementation: Resizing char[] array and length
+       
+       Remark: StringBuffer data type is similart, but thread safe(and slower)
+       
+
+String vs. StringBuilder
+
+How to efficiently reverse a string?
+A.
+   String rev = "";
+   for(int i = s.length() - 1; i >= 0; i--)
+        rev += s.charAt(i); //quadratic time
+   return rev;
+  
+B. String Builder rev = new StringBuilder();
+   for(int i = s.length() - 1; i >= 0; i--)
+        rev.append(s.charAt(i));  //linear time
+   return rev.toStirng();
+         
+         
+How to efficiently form array of suffixes?
+A.
+    int N = s.length();
+    String[] suffixes = new String[N];
+    for(int i = 0; i < N; i++)
+        suffixes[i] = s.substring(i, N);   //linear time and linear space
+    return suffixes;
+
+B. int N = s.length();
+   StringBuilder sb = new StringBuilder(s);
+   String[] suffixes = new String[N];
+   for(int i = 0; i < N; i++)
+       suffixes[i] = sb.substring(i, N); //quadratic time and quadratic space
+   return suffixes;
      
      
+How long to compute length of longest common prefix?
+     public static int lcp(String s, String t){
+         int N = Math.min(s.length(), t.length());
+         for(int i = 0; i < N; i++)
+             if(s.charAt(i) != t.charAt(i))     //linear time(worst cast)  sublinear time(typical case)
+                 return i;
+         return N;        
+     }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Key Indexed Counting
+   Goal: Sort an array a[] of N integers between 0 and R-1.
+     1. Count frequencies of each letter using key as index.
+     2. Compute frequency cumulates which specify destinations
+     3. Access cumulates using key as index to move items
+     4. Copy back into original array
      
-     
-     
-     
-     
+        
+    
