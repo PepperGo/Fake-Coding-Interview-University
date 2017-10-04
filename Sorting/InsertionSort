@@ -12,6 +12,10 @@ Insertion Sort: O(n^2) time
  If S is a balanced search tree, running time O(nlogn)
  
  
-
-    
-    
+-------------------------------------------------------------------------------------------------------------------
+Insertion Sort, Merge Sort (https://www.youtube.com/watch?v=Kg4bqzAqRBM&index=3&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb)
+     
+Insertion Sort:
+   for i = 1, 2, ..., n . Insert A[i] into array A[0: i-1], by pairwise swap down to the correct position.
+   
+   
