@@ -127,5 +127,30 @@ Key Indexed Counting
      3. Access cumulates using key as index to move items
      4. Copy back into original array
      
-        
-    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+least significant digit first string radix sort:
+
+LSD string(radix) sort:
+   Consier characters from right to left
+   Stably sort using dth character as the key(using key-indexed counting)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+Most significant Digit first string radix sort:
+   MSD String(radix) sort:
+      Partition array into R pieces according to first character(use key-indexed counting)
+      Recursively sort all strings that start with each character(key-indexed counts delineate subarrays to sort)
+      
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+3-Way Radix Quicksort
+Overview: Do 3-way partition on the dth character.
+          Less overhead than R-way partitioning in MSD string sort.
+          Does not reexamine characters equal to the partitioning char.
+          
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Suffix arrays
+
+
+          
+      
+ 
+
