@@ -227,11 +227,29 @@ Summary: 1. We can develop linear-time sorts.
             
 
 
+---------------------------------------------------------------------------------------------------------------------------
+http://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#radixSearch
 
+5.15.2.1 Bucket sort
+        The core idea of radix sort is that if we want to sort values from a small range, we can do it by making one bucket for each possible value and throw any object with that value into the corresponding bucket. 
+        If the number of possible values is too big, we may still be able to use bucket sort digit-by-digit. The resulting algorithms are known generally as radix sort.
 
-              
+5.15.2.2 Classic LSB radix sort
+        This is the variant used for punch cards, and works well for fixed-length strings. The idea is to sort on the least significant position first, then work backwards to the most significant position. This works as long as each sort is stable, meaning that it doesn't reorder values with equal keys.
+        
+        There are three downsides to LSB radix sort:
+        1. All the strings have to be the same length (this is not necessarily a problem if they are really fixed-width data types like ints).
+        2. The algorithm used to sort each position must be stable, which may require more effort than most programmers would like to take.
+        3. It may be that the late positions in the strings don't affect the order, but we have to sort on them anyway. If we are sorting  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa and baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, we spend a lot of time matching up as against each other.
 
-
+5.15.2.3 MSB radix sort
+        For these reasons, MSB radix sort is used more often. 
+        This is basically the radix sort version of quicksort, where instead of partitioning our input data into two piles based on whether each element is less than or greater than a random pivot, we partition the input into 256 piles, one for each initial byte. 
+        We can then sort each pile recursively using the same algorithm, taking advantage of the fact that we know that the first byte (or later, the first k bytes) are equal and so we only need to look at the next one.
+        The recursion stops when we get down to 1 value, or in practice where we get down to a small enough number of values that the cost of doing a different sorting algorithm becomes lower than the cost of creating and tearing down the data structures for managing the piles.
+        
+-----------------------------------------------------------------------------------------------------------------------------
+...
           
       
  
