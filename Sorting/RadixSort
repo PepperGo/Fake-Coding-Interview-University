@@ -142,12 +142,94 @@ Most significant Digit first string radix sort:
       
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 3-Way Radix Quicksort
-Overview: Do 3-way partition on the dth character.
+Overview: Do 3-way partition on the dth character. (less than, equal, larger then)
           Less overhead than R-way partitioning in MSD string sort.
           Does not reexamine characters equal to the partitioning char.
           
+          private static void sort(String[] a){
+              sort(a, 0, a.length - 1, 0);
+          }
+          
+          private static void sort(String[] a, int lo, int hi, int d){
+              if(hi <= lo) return;
+              int lt = lo, gt = hi;
+              int v = charAt(a[lo], d);
+              int i = lo + 1;
+              while(i < = gt){
+                  int t = charAt(a[i], d);
+                  if(t < v) exch(a, lt++, i++);
+                  else if(t > v) exch(a, i, gt--);
+                  else i++
+              }
+              sort(a, lo, lt - 1, d);
+              if(v >= 0) sort(a, lt, gt, d + 1); // sort 3 subarrays recursively
+              sort(a, gt + 1, hi, d);
+          }
+          
+MSD string sort: is cache-inefficient.
+                 too much memory storing count[]
+                 too much overhead reinitializing count[] and aux[]
+           
+          
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Suffix arrays
+
+Keyword-in-context search: Given a text of N characters, preprocess it to enable fast substring search(find all occurrences of query string context).
+        Solution: suffix:
+                  1. take the input string, form all the suffixes (linear time)
+                  2. sort suffixes to bring repeated substrings together 
+        Preprocess: suffix sort the text
+        Query: binary search for query; scan until mismatch
+        
+Longest repeated substring: Given a string of N characters, find the longest repeated substring.
+        Brute-force algorithm: 1. Try all indices i and j for start of possible match.
+                               2. Compute longest common prefix(LCP) for each pair.
+                Analysis: Running time <= DN^2, where D is length of longest match.
+                
+        A sorting solution:    1. from suffixes
+                               2. sort suffixes to bring repeated substrings together
+                               3. compute longest prefix between adjacent suffixes
+                               
+                            
+        public String lrs(String s){
+           int N = s.length();
+           
+           String[] suffixes = new String[N];
+           for(int i = 0; i < N; i++)
+               suffixes[i] = s.substring(i, N);
+           
+           Arrays.sort(suffixes);
+           
+           String lrs = "";
+           for(int i = 0; i < N - 1; i++){
+               int len = lcp(suffixes[i], suffixes[i + 1]);
+               if(len > lrs.length())
+                    len = suffixes[i].substring(0, len);
+           }
+           return lrs;
+        }  
+          
+          
+Summary: 1. We can develop linear-time sorts.
+             Key compares not neccessary for string keys
+             Use characters as index in an array.
+             
+         2. We can develop  sublinear-time sorts
+            Input size is amount of data in keys(not number of keys)
+            Not all of the data has to be examined
+           
+         3. 3-way stirng quicksort is asymptotically optimal
+            1.39NlgN chars for random data
+            
+         4. Long strings are rarely random in practice
+            Goal is often to learn the structure.
+            May need specialized algorithms
+            
+
+
+
+
+              
 
 
           
