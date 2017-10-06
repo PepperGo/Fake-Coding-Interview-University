@@ -1,0 +1,47 @@
+https://www.youtube.com/watch?v=OiXxhDrFruw&list=PLOtl7M3yp-DV69F32zdK7YJcNXpTunF2b&index=11
+
+
+A graph G = (V, E) is defined by a set of vertices V, and a set of edges E consisting of ordered or unordered pairs of vertices from V.
+
+Road Networks: In modeling a road network, the vertices may represent the cities or junctions, certain pairs of which are connected by roads/edges.
+
+Directed vs Undirected Graphs
+    A graph G = (V, E) is undirected if edge(x, y) ∈ E implies that (y, x) is also in E.
+    
+Weighted vs Unweighted Graph
+    In weight graphs, each edge(or vertex) of G is assigned a numberical value, or weight.
+    In unweight graphs, there is no cost distinction between various edges and vertices.
+    
+Simple vs Non-simple Graphs
+    A self-loop is an edge(x, x) involving only one vertex.
+    An edge(x, y) is a multi-edge if it occurs more than once in the graph.
+    
+    Any graph which avoid these structures is called simple graph.
+    
+Sparse vs Dense Graph
+    Graphs are sparse when only a small fractin of the possible number of vertex pairs actually have edges defined between them.
+    Dense graphs have a quadratic number edges while sparse graphs are linear in size.
+    A dense graph is a graph in which the number of edges is close to the maximal number of edges. 
+    The opposite, a graph with only a few edges, is a sparse graph.
+    
+Cyclic vs Acyclic graphs
+    An acyclic graph does not contain any cycles. Trees are connected acyclic undirected graphs.
+    Directed acyclic graphs are called DAGs. They arise naturally in scheduling problems, where a directed edge(x, y) indicates that x must occur before y.
+    
+Labeled vs Unlabeled Graphs
+    In labeled graphs, each vertex is assigned a unique name or identifier to distinguish it from all other vertices.
+    //An important graph problem is isomorphism testing, determining whether the topological structure of two graphs are in fact identical if we ignore any labels.s.
+    
+    
+DataStructures for Graphs: 
+    1. Adjacency Matrix
+    There are two main data structures used to represent graphs. We assume the graph G = (V, E) contains n vertices and m edges.
+    We can represent G using an n * n matrix M, where element M[i, j] is, say 1, if(i, j) is an edge of G, and 0 if it isn't.
+    However, it may use excessive space for graphs with many vertices and relatively few edges.
+    
+    2. Adjacency Lists
+    An adjacency list consists of a N * 1 array of pointers, where the ith element points to a linked list of the edges incident on vertex i.
+    
+    To test if edge(i, j) is in the graph, we search the ith  list for j, which takes O(di), where di is the degree of the ith vertex.
+    
+    
